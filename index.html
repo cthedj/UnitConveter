@@ -1,145 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unit Converter</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universal Unit Converter</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f4f8;
-      color: #333;
+      background-color: #f4faff;
+      color: #222;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
-
-    header {
-      background-color: #0a74da;
-      color: white;
-      padding: 1rem;
+    h1 {
       text-align: center;
+      color: #0077cc;
     }
-
     .tabs {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      background-color: #e0ecf8;
-      padding: 0.5rem;
+      margin-bottom: 20px;
     }
-
     .tab {
-      background: #ffffff;
-      border: 1px solid #ccc;
-      padding: 0.5rem 1rem;
-      margin: 0.25rem;
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #e1effa;
+      border-radius: 5px;
       cursor: pointer;
-      border-radius: 4px;
+      border: 1px solid #b4dbf4;
     }
-
     .tab.active {
-      background-color: #0a74da;
+      background-color: #0077cc;
       color: white;
-      border-color: #0a74da;
+      font-weight: bold;
     }
-
     .converter {
-      max-width: 600px;
-      margin: 2rem auto;
+      max-width: 500px;
+      margin: auto;
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
+      padding: 20px;
+      border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.05);
     }
-
-    .converter label,
-    .converter select,
-    .converter input {
-      display: block;
+    .form-group {
+      margin-bottom: 15px;
+    }
+    select, input {
       width: 100%;
-      margin-bottom: 1rem;
-    }
-
-    .converter select, .converter input {
-      padding: 0.5rem;
+      padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
-
-    .result {
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
       font-weight: bold;
-      font-size: 1.2rem;
       text-align: center;
-      margin-top: 1rem;
+      color: #0077cc;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Universal Unit Converter</h1>
-  </header>
+  <h1>Universal Unit Converter</h1>
 
   <div class="tabs">
     <div class="tab active" data-category="length">Length</div>
     <div class="tab" data-category="volume">Volume</div>
     <div class="tab" data-category="weight">Weight</div>
     <div class="tab" data-category="temperature">Temperature</div>
-    <!-- Add more tabs as needed -->
   </div>
 
-  <div class="converter" id="converter">
-    <label for="inputValue">Enter value:</label>
-    <input type="number" id="inputValue" placeholder="Enter value" />
+  <div class="converter">
+    <div class="form-group">
+      <label for="inputValue">Enter value:</label>
+      <input type="number" id="inputValue" placeholder="Enter number to convert" />
+    </div>
 
-    <label for="fromUnit">From:</label>
-    <select id="fromUnit"></select>
+    <div class="form-group">
+      <label for="fromUnit">From unit:</label>
+      <select id="fromUnit"></select>
+    </div>
 
-    <label for="toUnit">To:</label>
-    <select id="toUnit"></select>
+    <div class="form-group">
+      <label for="toUnit">To unit:</label>
+      <select id="toUnit"></select>
+    </div>
 
-    <div class="result" id="result">Result: —</div>
+    <div id="result">Result: —</div>
   </div>
 
-  <script>
-    const unitData = {
-      length: ['Meter', 'Kilometer', 'Centimeter', 'Millimeter', 'Inch', 'Foot', 'Yard', 'Mile'],
-      volume: ['Liter', 'Milliliter', 'Cubic Meter', 'Cubic Inch', 'Gallon', 'Quart'],
-      weight: ['Gram', 'Kilogram', 'Milligram', 'Pound', 'Ounce'],
-      temperature: ['Celsius', 'Fahrenheit', 'Kelvin']
-    };
-
-    const tabs = document.querySelectorAll('.tab');
-    const fromSelect = document.getElementById('fromUnit');
-    const toSelect = document.getElementById('toUnit');
-
-    function populateUnits(category) {
-      fromSelect.innerHTML = '';
-      toSelect.innerHTML = '';
-      unitData[category].forEach(unit => {
-        const option1 = document.createElement('option');
-        option1.value = unit;
-        option1.textContent = unit;
-
-        const option2 = option1.cloneNode(true);
-
-        fromSelect.appendChild(option1);
-        toSelect.appendChild(option2);
-      });
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const category = tab.dataset.category;
-        populateUnits(category);
-      });
-    });
-
-    // Initialize with default category
-    populateUnits('length');
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
